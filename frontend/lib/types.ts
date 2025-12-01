@@ -96,6 +96,7 @@ export interface Message {
   role: "user" | "assistant" | "system"
   content: string
   sql_query: string | null
+  graph_url: string | null
   created_at: string
   sequence_order: number
   message_metadata: Record<string, any> | null
@@ -125,6 +126,7 @@ export interface Run {
   task_id: string | null
   sql_used: string | null
   result_data: string | null
+  graph_url: string | null
   status: "queued" | "running" | "success" | "failure"
   execution_ms: number | null
   result_rows_count: number | null

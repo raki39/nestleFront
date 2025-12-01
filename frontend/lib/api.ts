@@ -12,7 +12,7 @@ import type {
   RunCreate,
 } from './types'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
 // Create axios instance
 const api = axios.create({
@@ -179,6 +179,36 @@ export const runsAPI = {
   get: async (runId: number): Promise<Run> => {
     const response = await api.get<Run>(`/runs/${runId}`)
     return response.data
+  },
+
+  // Fetch graph image with authentication and return as blob URL
+  getGraphBlobUrl: async (graphUrl: string): Promise<string> => {
+    const fullUrl = `${API_URL}${graphUrl}`
+
+    // Get token from storage
+    const storage = localStorage.getItem('agent-app-storage')
+    let token = ''
+    if (storage) {
+      try {
+        const parsed = JSON.parse(storage)
+        token = parsed.state?.token || ''
+      } catch (e) {
+        console.error('Error parsing token from storage:', e)
+      }
+    }
+
+    const response = await fetch(fullUrl, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch graph: ${response.status}`)
+    }
+
+    const blob = await response.blob()
+    return URL.createObjectURL(blob)
   },
 }
 

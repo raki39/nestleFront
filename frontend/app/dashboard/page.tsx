@@ -7,6 +7,7 @@ import type { ChatSession, Message } from '@/lib/types'
 import ChatSidebar from '@/components/ChatSidebar'
 import ChatInput from '@/components/ChatInput'
 import SettingsModal from '@/components/SettingsModal'
+import GraphImage from '@/components/GraphImage'
 import { Bot, User, Code, Loader2, Copy, Check } from 'lucide-react'
 import { chatSessionsAPI } from '@/lib/api'
 import { cn } from '@/lib/utils'
@@ -239,6 +240,10 @@ export default function DashboardPage() {
                         </pre>
                       </div>
                     </div>
+                  )}
+
+                  {message.graph_url && (
+                    <GraphImage graphUrl={message.graph_url} />
                   )}
                 </div>
 

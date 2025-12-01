@@ -43,6 +43,7 @@ export default function ChatInput({ agentId, sessionId, onSessionCreated, onMess
         role: 'user',
         content: question,
         sql_query: null,
+        graph_url: null,
         created_at: new Date().toISOString(),
         sequence_order: 0,
         message_metadata: null,
@@ -56,6 +57,7 @@ export default function ChatInput({ agentId, sessionId, onSessionCreated, onMess
         role: 'assistant',
         content: 'Processando...',
         sql_query: null,
+        graph_url: null,
         created_at: new Date().toISOString(),
         sequence_order: 1,
         message_metadata: null,
@@ -83,6 +85,7 @@ export default function ChatInput({ agentId, sessionId, onSessionCreated, onMess
               ...assistantMessage,
               content: result.result_data || 'Resposta recebida',
               sql_query: result.sql_used,
+              graph_url: result.graph_url,
               run_id: result.id,
             }
 
