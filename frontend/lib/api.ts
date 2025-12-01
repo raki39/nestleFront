@@ -183,7 +183,9 @@ export const runsAPI = {
 
   // Fetch graph image with authentication and return as blob URL
   getGraphBlobUrl: async (graphUrl: string): Promise<string> => {
-    const fullUrl = `${API_URL}${graphUrl}`
+    // Remove /api prefix if present (backend returns /api/runs/X/graph but route is /runs/X/graph)
+    const cleanUrl = graphUrl.startsWith('/api') ? graphUrl.replace('/api', '') : graphUrl
+    const fullUrl = `${API_URL}${cleanUrl}`
 
     // Get token from storage
     const storage = localStorage.getItem('agent-app-storage')
