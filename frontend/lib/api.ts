@@ -82,7 +82,7 @@ export const authAPI = {
 // Agents API
 export const agentsAPI = {
   list: async (): Promise<Agent[]> => {
-    const response = await api.get<Agent[]>('/agents/')
+    const response = await api.get<Agent[]>('/agents')
     return response.data
   },
 
@@ -100,12 +100,12 @@ export const agentsAPI = {
 // Connections API
 export const connectionsAPI = {
   list: async (): Promise<Connection[]> => {
-    const response = await api.get<Connection[]>('/connections/')
+    const response = await api.get<Connection[]>('/connections')
     return response.data
   },
 
   create: async (data: any): Promise<Connection> => {
-    const response = await api.post<Connection>('/connections/', data)
+    const response = await api.post<Connection>('/connections', data)
     return response.data
   },
 
@@ -133,7 +133,7 @@ export const connectionsAPI = {
 // Chat Sessions API
 export const chatSessionsAPI = {
   list: async (agentId: number, page = 1, perPage = 20): Promise<ChatSessionListResponse> => {
-    const response = await api.get<ChatSessionListResponse>('/chat-sessions/', {
+    const response = await api.get<ChatSessionListResponse>('/chat-sessions', {
       params: {
         agent_id: agentId,
         page,
@@ -150,7 +150,7 @@ export const chatSessionsAPI = {
   },
 
   create: async (agentId: number, title?: string): Promise<ChatSession> => {
-    const response = await api.post<ChatSession>('/chat-sessions/', {
+    const response = await api.post<ChatSession>('/chat-sessions', {
       agent_id: agentId,
       title,
     })
