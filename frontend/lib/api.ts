@@ -12,7 +12,7 @@ import type {
   RunCreate,
 } from './types'
 
-// HARD CODED API URL FOR VPN
+// HARD CODED FOR VPN
 export const API_URL = 'http://192.168.10.35:8000'
 
 // Create axios instance
