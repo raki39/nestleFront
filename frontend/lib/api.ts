@@ -12,15 +12,8 @@ import type {
   RunCreate,
 } from './types'
 
-// Get API URL from window object (set by runtime config) or fallback to env var
-const getApiUrl = () => {
-  if (typeof window !== 'undefined' && (window as any).__RUNTIME_CONFIG__?.NEXT_PUBLIC_API_URL) {
-    return (window as any).__RUNTIME_CONFIG__.NEXT_PUBLIC_API_URL
-  }
-  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-}
-
-export const API_URL = getApiUrl()
+// HARD CODED API URL FOR VPN
+export const API_URL = 'http://192.168.10.35:8000'
 
 // Create axios instance
 const api = axios.create({
